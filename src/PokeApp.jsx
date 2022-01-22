@@ -14,7 +14,7 @@ export const PokeApp = () => {
   });
   const { hiddenPokemon, status } = randomPokemon;
   const [ folded, setFolded ] = useState( true );
-
+  const [ win, setWin ] = useState( false );
 
   useEffect( () => {
     setRandomPokemon({
@@ -25,11 +25,11 @@ export const PokeApp = () => {
   
   return(
     <PokemonContext.Provider
-      value = { { hiddenPokemon, setFolded } }
+      value = { { hiddenPokemon, setFolded, win, setWin } }
     >
       <div className="mt-28">
         {
-          status && <PokemonToGuess pokemon = { { hiddenPokemon, folded } } />
+          status && <PokemonToGuess pokemon = { { hiddenPokemon, folded} } />
         }
         <TableOptions 
           pokemons = { pokemons }

@@ -6,6 +6,19 @@ body{
 	background-color:  rgb(253 224 71);
 }
 
+*.unselectable {
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+
+	/*
+		Introduced in IE 10.
+		See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+	*/
+	-ms-user-select: none;
+	user-select: none;
+}
+
 .hiddenpokemon{
 	-webkit-filter: grayscale(100%) brightness(0); /* Safari 6.0 - 9.0 */
 	filter: grayscale(100%) brightness(0);

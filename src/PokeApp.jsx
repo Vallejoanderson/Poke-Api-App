@@ -1,38 +1,40 @@
-import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import { TableOptions } from "./components/TableOptions";
 import { getRandomPokemon } from "./services/getRandomPokemon"
 import { usePokemons } from "./hooks/usePokemons";
 import { PokemonToGuess } from "./components/PokemonToGuess";
-// import { useRandomPokemon } from "./hooks/useRandomPokemon";
-
+import { PokemonContext } from "./components/PokemonContext";
 
 export const PokeApp = () => {
 
   const pokemons = usePokemons();
   const [ randomPokemon, setRandomPokemon ] = useState({
-    pokemon: {},
+    hiddenPokemon: {},
     status: false,
   });
-  const { pokemon, status } = randomPokemon;
+  const { hiddenPokemon, status } = randomPokemon;
+  const [ folded, setFolded ] = useState( true );
 
 
   useEffect( () => {
     setRandomPokemon({
-      pokemon: { ...pokemons[ getRandomPokemon() ] } ,
+      hiddenPokemon: { ...pokemons[ getRandomPokemon() ] } ,
       status: true,
     })
   }, [ pokemons ] );
   
-  
-  return (
-    <div className="mt-28">
-      {
-        status && <PokemonToGuess pokemon = { pokemon } />
-      }
-      <TableOptions 
-        pokemons = { pokemons }
-      />
-    </div>
+  return(
+    <PokemonContext.Provider
+      value = { { hiddenPokemon, setFolded } }
+    >
+      <div className="mt-28">
+        {
+          status && <PokemonToGuess pokemon = { { hiddenPokemon, folded } } />
+        }
+        <TableOptions 
+          pokemons = { pokemons }
+        />
+      </div>
+    </PokemonContext.Provider>
   )
 }

@@ -2,7 +2,8 @@
 
 export const PokemonToGuess = ( { pokemon } ) => {
 
-	const { img } = pokemon;
-	return( <img className="hiddenpokemon mb-12" src={ img } />)
+	const { hiddenPokemon, folded } = pokemon;
+	console.log( hiddenPokemon, folded );
+	return( <img className={`mb-12 ${ folded && 'hiddenpokemon' }`} src={ hiddenPokemon.img } />)
 
 }

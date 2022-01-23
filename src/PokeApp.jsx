@@ -4,10 +4,11 @@ import { getRandomPokemon } from "./services/getRandomPokemon"
 import { usePokemons } from "./hooks/usePokemons";
 import { PokemonToGuess } from "./components/PokemonToGuess";
 import { PokemonContext } from "./components/PokemonContext";
+import { PlayAgain } from "./components/PlayAgain";
 
 export const PokeApp = () => {
 
-  const pokemons = usePokemons();
+  let pokemons = usePokemons();
   const [ randomPokemon, setRandomPokemon ] = useState({
     hiddenPokemon: {},
     status: false,
@@ -34,6 +35,7 @@ export const PokeApp = () => {
         <TableOptions 
           pokemons = { pokemons }
         />
+        <PlayAgain pokemons = { pokemons }/>
       </div>
     </PokemonContext.Provider>
   )

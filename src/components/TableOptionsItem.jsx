@@ -9,10 +9,10 @@ export const TableOptionsItem = ( { pokemon } ) => {
 
 		setFolded( folded => false );
 		if( hiddenPokemon.id === pokemon.id ){
-			target.classList.add('bg-green-400', 'animate__animated', 'animate__heartBeat');
+			target.classList.add('bg-green-500', 'animate__animated', 'animate__heartBeat');
 		}
 		else{
-			target.classList.add('bg-rose-700', 'animate__animated', 'animate__headShake');
+			target.classList.add('bg-rose-600', 'animate__animated', 'animate__headShake');
 		}
 	}
 

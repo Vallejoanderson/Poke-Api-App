@@ -8,7 +8,7 @@ import { PlayAgain } from "./components/PlayAgain";
 
 export const PokeApp = () => {
 
-  let pokemons = usePokemons();
+  const { pokemons, getPokemons } = usePokemons();
   const [ randomPokemon, setRandomPokemon ] = useState({
     hiddenPokemon: {},
     status: false,
@@ -16,6 +16,15 @@ export const PokeApp = () => {
   const { hiddenPokemon, status } = randomPokemon;
   const [ folded, setFolded ] = useState( true );
   const [ win, setWin ] = useState( false );
+  const [ round, setRound ] = useState( 1 );
+
+  useEffect( () => { 
+
+    getPokemons()
+    console.log('Llamaste a getPokemons');
+    console.log( round );
+
+  }, [ round ])
 
   useEffect( () => {
     setRandomPokemon({
@@ -23,6 +32,8 @@ export const PokeApp = () => {
       status: true,
     })
   }, [ pokemons ] );
+
+  console.log( pokemons )
   
   return(
     <PokemonContext.Provider
@@ -35,7 +46,7 @@ export const PokeApp = () => {
         <TableOptions 
           pokemons = { pokemons }
         />
-        <PlayAgain pokemons = { pokemons }/>
+        <PlayAgain setRound = { setRound } />
       </div>
     </PokemonContext.Provider>
   )

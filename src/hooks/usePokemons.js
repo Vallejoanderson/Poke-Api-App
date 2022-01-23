@@ -2,17 +2,24 @@ import { useEffect, useState } from "react";
 import { getPokemon } from "../services/getPokemon";
 
 
-export const usePokemons = () => {
+export const usePokemons = ( initialState = [] ) => {
 
-  const [ pokemons, setPokemons ] = useState([]);
+  const [ pokemons, setPokemons ] = useState( initialState );
 
-  useEffect( () => {
+  const getPokemons = () => {
 
     Promise.all( [ getPokemon(), getPokemon(), getPokemon(), getPokemon() ] )
       .then( values => setPokemons( values ) )
 
-  }, [] );
+  }
 
-  return( pokemons );
+  console.log( pokemons )
+
+  return{
+
+    pokemons,
+    getPokemons,
+
+  } 
 
 }

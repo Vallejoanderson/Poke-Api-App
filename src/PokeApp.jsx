@@ -5,6 +5,10 @@ import { usePokemons } from "./hooks/usePokemons";
 import { PokemonToGuess } from "./components/PokemonToGuess";
 import { PokemonContext } from "./components/PokemonContext";
 import { PlayAgain } from "./components/PlayAgain";
+import { PoweredBy } from "./components/PoweredBy";
+import { PokeTopImg } from "./components/PokeTopImg";
+import { GameOver } from "./components/GameOver";
+import { GameDataBoard } from "./components/GameDataBoard";
 
 export const PokeApp = () => {
 
@@ -15,13 +19,14 @@ export const PokeApp = () => {
   });
   const { hiddenPokemon, status } = randomPokemon;
   const [ folded, setFolded ] = useState( true );
-  const [ win, setWin ] = useState( false );
   const [ round, setRound ] = useState( 1 );
+  const [ played, setPlayed ] = useState( false );
+  const [ hearts, setHearts ] = useState( 3 );
 
   useEffect( () => { 
 
     getPokemons()
-    console.log('Llamaste a getPokemons');
+    setPlayed( played => false );
     console.log( round );
 
   }, [ round ])
@@ -37,16 +42,27 @@ export const PokeApp = () => {
   
   return(
     <PokemonContext.Provider
-      value = { { hiddenPokemon, setFolded, win, setWin } }
+      value = {{
+                hiddenPokemon,
+                setFolded,
+                round,
+                setRound,
+                played, 
+                setPlayed,
+                hearts,
+                setHearts,
+              }}
     >
-      <div className="mt-28">
+      <PokeTopImg />
+      <GameDataBoard />
+    
+      <div>
         {
-          status && <PokemonToGuess pokemon = { { hiddenPokemon, folded} } />
+          hearts > 0 ? status && <PokemonToGuess pokemon = { { hiddenPokemon, folded} } /> : <GameOver />
         }
-        <TableOptions 
-          pokemons = { pokemons }
-        />
-        <PlayAgain setRound = { setRound } />
+        <TableOptions pokemons = { pokemons } />
+        <PlayAgain values = { setHearts, setRound } />
+        <PoweredBy />
       </div>
     </PokemonContext.Provider>
   )

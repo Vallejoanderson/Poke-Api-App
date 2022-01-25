@@ -8,7 +8,7 @@ export const GameDataBoard = () => {
 	const { hearts, round } = useContext( PokemonContext );
 
 	return (
-				<div className="flex justify-evenly mt-4">
+				<div className="flex justify-evenly mt-4 w-96 mx-auto">
 					<div>
 							<p className="text-slate-100 text-center font-bold">Round</p>
 							<p className="bg-purple-800 text-slate-300 inline-block 
@@ -24,14 +24,14 @@ export const GameDataBoard = () => {
 								hearts > 0 ?
 								[ ...Array( hearts ) ].map((e, i ) => 
 								(
-									<i className="animate__animated animate__pulse fas
+									<i key={ i } className="animate__animated animate__pulse fas
 																fa-heart fa-2x text-red-700 inline-block
 																mr-1"></i>
 								))
 								:
 								[ ...Array( 3 ) ].map((e, i ) => 
 								(
-									<i className="animate__animated animate__pulse fas
+									<i key={ i } className="animate__animated animate__pulse fas
 																fa-heart-broken fa-2x text-red-700 inline-block
 																mr-1"></i>
 								))

@@ -27,7 +27,7 @@ export const PokeApp = () => {
 
     getPokemons()
     setPlayed( played => false );
-    console.log( round );
+    // console.log( round );
 
   }, [ round ])
 
@@ -38,7 +38,7 @@ export const PokeApp = () => {
     })
   }, [ pokemons ] );
 
-  console.log( pokemons )
+  // console.log( pokemons )
   
   return(
     <PokemonContext.Provider

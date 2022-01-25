@@ -13,7 +13,7 @@ export const usePokemons = ( initialState = [] ) => {
 
   }
 
-  console.log( pokemons )
+  // console.log( pokemons )
 
   return{
 
